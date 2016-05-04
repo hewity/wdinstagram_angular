@@ -1,36 +1,29 @@
 "use strict";
 
 (function(){
-
   angular
-  .module("wdinstagram", ["ui.router"])
-  .config(["$stateProvider","$locationProvider", RouterFunction])
-  .controller("PostIndexController", PostIndexControllerFunc)
-  .controller("PostShowController", PostShowControllerFunc)
-  .factory("PostFactory", PostFactoryFunc);
+    .module("wdinstagram", [
+      "ui.router"
+    ])
+    .config([
+      "$stateProvider",
+      RouterFunc
+    ])
 
-  .config([
-    "$stateProvider",
-    "$locationProvider",
-    RouterFunction
-  ]);
+    function RouterFunc($stateProvider) {
+      $stateProvider
+        .state("entriesIndex", {
+          url: "/entries",
+          templateUrl: "js/entries/index.html",
+          controller: "IndexController",
+          controllerAs: "indexVm"
+        })
+        .state("entryShow", {
+          url: "entryies/:id",
+          templateUrl: "js/entries/show.html",
+          controller: "EntriesShowCtrl",
+          controllerAs: "showVm"
+        })
+    }
 
-
-  function RouterFuction($stateProvider) {
-    $stateProvider
-    .state("postIndex", {
-      url: "/posts",
-      templateUrl: "js/index.html",
-      controller: "PostIndexController",
-      controllerAs: "indexVm"
-    })
-    .state("PostsShow", {
-      url: "/posts/:id",
-      templateUrl: "js/show.html",
-      controller: "PostShowController",
-      controllerAs: "posyshowVm"
-    });
-  }
-
-}
 })();
